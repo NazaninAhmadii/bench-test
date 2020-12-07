@@ -22,12 +22,22 @@ header{
     margin: 3rem;
 }
 
+.container__loading {
+    margin: 0 auto;
+    background-color: darkgreen;
+    color: white;
+    padding: 2rem;
+    font-size: large;
+    text-align: center;
+}
+
 .transaction__table {
     width: auto;
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 1fr;
     background-color: white;
 }
+
 
 thead, tbody, tr {
     display: contents;

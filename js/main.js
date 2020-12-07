@@ -66,8 +66,12 @@ const renderTableAndCalculateBalance = (transactions, tableBody) => {
 //The application
 const app = async () => {
     try {
-        const totalBalance = document.querySelector("[data-js=totalBalance]");
-        const transactionTableBody = document.querySelector("[data-js=transactionBody]");
+        const loadingContainer = document.querySelector(
+            "[data-js=loadingContainer]")
+        const totalBalance = document.querySelector(
+            "[data-js=totalBalance]");
+        const transactionTableBody = document.querySelector(
+            "[data-js=transactionBody]");
         //Get data from API
         let counter = 1;
 
@@ -82,6 +86,9 @@ const app = async () => {
             const pageData = await fetchPage(counter);
             transactions = transactions.concat(pageData.transactions);
         }
+
+        //removing loading popup
+        loadingContainer.style.display = 'none';
 
         //Sort transactions based on Date
         const compareFunc = (a, b) => {
