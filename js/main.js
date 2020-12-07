@@ -1,8 +1,14 @@
+// use JSDoc (https://jsdoc.app/) to generate API Doc
 
 //the REST API endpoint
 const BASE_URL = 'https://resttest.bench.co/transactions/';
 
-
+/**
+ * Given a page id it fetches and returns page data.
+ * @param {number} page - The page ID.
+ * @returns {array} - The page data
+ * @throws Error exeption if fails to fetch data
+ */
 const fetchPage = async (page) => {
     //fetch data from the API per page number
     const response = await fetch(`${BASE_URL}${page}.json`);
@@ -16,10 +22,43 @@ const fetchPage = async (page) => {
     }
 }
 
+/**
+ * Given a transaction row it construct the HTML representaion of that row.
+ * @param {object} transactionRow - transaction row
+ * @returns {string} - The HTML representation of row data
+ */
+const createRow = (transactionRow) => {
+    //generate and returns the new row
+    return `<tr>
+    <td>${transactionRow.Date}</td>
+    <td>${transactionRow.Company}</td>
+    <td>${transactionRow.Ledger}</td>
+    <td>${transactionRow.Amount}</td>
+    </tr>`
+}
+
+/**
+ * Renders HTML table content, given transactions data and table body element.
+ * Also calculate and returns totalBalance
+ * @param {array} transactions - transaction array
+ * @param {HTMLElement} tableBody - table body to update
+ * @returns {number}
+ */
+const renderTableAndCalculateBalance = (transactions, tableBody) => {
+    let totalBalance = 0.0;
+    if (transactions.length) {
+        transactions.map((item) => {
+            totalBalance += parseFloat(item.Amount);
+            tableBody.innerHTML += createRow(item);
+        })
+    }
+}
+
 //The application
 const app = async () => {
     try {
-
+        const totalBalance = document.querySelector("[data-js=totalBalance]");
+        const transactionTableBody = document.querySelector("[data-js=transactionBody]");
         //Get data from API
         let counter = 1;
 
@@ -35,7 +74,8 @@ const app = async () => {
             transactions = transactions.concat(pageData.transactions);
         }
 
-        console.log(transactions)
+        renderTableAndCalculateBalance(transactions,
+            transactionTableBody);
 
     } catch (e) {
         console.log(e)
