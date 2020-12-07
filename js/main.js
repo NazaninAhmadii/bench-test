@@ -65,9 +65,12 @@ const renderTableAndCalculateBalance = (transactions, tableBody) => {
 
 //The application
 const app = async () => {
+    const errorContainer = document.querySelector(
+        "[data-js=errorContainer]");
+    const loadingContainer = document.querySelector(
+        "[data-js=loadingContainer]");
+
     try {
-        const loadingContainer = document.querySelector(
-            "[data-js=loadingContainer]")
         const totalBalance = document.querySelector(
             "[data-js=totalBalance]");
         const transactionTableBody = document.querySelector(
@@ -111,8 +114,11 @@ const app = async () => {
             .format(balance);
         totalBalance.innerHTML = `${formatedBalance}`
 
-    } catch (e) {
-        console.log(e)
+    } catch (e) { //catching any exception during execution of app
+        //ideally the error should be reported back to server for server side logging
+        console.log(e);
+        loadingContainer.style.display = "none";
+        errorContainer.style.display = "block";
     }
 }
 
