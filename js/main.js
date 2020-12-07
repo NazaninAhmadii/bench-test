@@ -1,4 +1,5 @@
 // use JSDoc (https://jsdoc.app/) to generate API Doc
+// Author: Nazanin
 
 //the REST API endpoint
 const BASE_URL = 'https://resttest.bench.co/transactions/';

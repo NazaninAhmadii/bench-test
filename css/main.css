@@ -72,5 +72,23 @@ th{
     top:0;
     color: #098B8C;
     background-color: white;
+    box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.2);
+}
+
+td {
+    box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.2);
+    font-size: small;
+}
+
+tr:first-child td {
+    background-image: linear-gradient(to bottom,#F2F2F2 , white);
+}
+
+tr:nth-child(even) td {
+    color: #098B8C;
+}
+
+td:nth-child(odd) {
+    color: gray;
 }
 
