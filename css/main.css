@@ -9,3 +9,39 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+header{
+    width: 100vw;
+    background-color: #098B8C;
+    color: white;
+    text-align: center;
+    padding: 4rem;
+    font-size: 2rem;
+}
+
+.container{
+    margin: 3rem;
+}
+
+.transaction__table {
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    background-color: white;
+}
+
+thead, tbody, tr {
+    display: contents;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+}
+
+th{
+    position: sticky;
+    top:0;
+    color: #098B8C;
+    background-color: white;
+}
+
