@@ -53,8 +53,13 @@ header{
 .transaction__table {
     width: auto;
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-columns: 
+        minmax(80px,1fr) 
+        minmax(120px,2fr) 
+        minmax(100px,2fr) 
+        minmax(100px,1fr);
     background-color: white;
+    overflow: auto;
 }
 
 
@@ -90,5 +95,15 @@ tr:nth-child(even) td {
 
 td:nth-child(odd) {
     color: gray;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        margin: 1rem;
+    }
+
+    th{
+        padding: 0.5;
+    }
 }
 
