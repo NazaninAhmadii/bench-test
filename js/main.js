@@ -75,20 +75,24 @@ const app = async () => {
             "[data-js=totalBalance]");
         const transactionTableBody = document.querySelector(
             "[data-js=transactionBody]");
+
         //Get data from API
         let counter = 1;
+        let totalCount = 0;
+        let transactions = [];
 
-        //Get firstpage data
-        const firstPage = await fetchPage(counter);
-        const totalCount = firstPage.totalCount;
-        let transactions = firstPage.transactions;
+        // Showing loading popup
+        loadingContainer.style.display = 'block';
 
         // Get data from all pages 
-        while (transactions.length < totalCount) {
-            counter++;
+        do {
             const pageData = await fetchPage(counter);
             transactions = transactions.concat(pageData.transactions);
-        }
+            totalCount = pageData.totalCount;
+            counter++;
+        } while (transactions.length < totalCount)
+
+
 
         //removing loading popup
         loadingContainer.style.display = 'none';
@@ -112,7 +116,7 @@ const app = async () => {
         let formatedBalance = Intl.NumberFormat('en-US',
             { style: 'currency', currency: 'USD' })
             .format(balance);
-        totalBalance.innerHTML = `${formatedBalance}`
+        totalBalance.innerHTML = `${formatedBalance}`;
 
     } catch (e) { //catching any exception during execution of app
         //ideally the error should be reported back to server for server side logging
