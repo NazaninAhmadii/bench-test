@@ -1,0 +1,24 @@
+{
+  "name": "bench-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "serve": "http-server ./",
+    "docs": "jsdoc ./js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NazaninAhmadii/bench-test.git"
+  },
+  "author": "Nazanin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NazaninAhmadii/bench-test/issues"
+  },
+  "homepage": "https://github.com/NazaninAhmadii/bench-test#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3",
+    "jsdoc": "^3.6.6"
+  }
+}
