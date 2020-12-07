@@ -83,6 +83,18 @@ const app = async () => {
             transactions = transactions.concat(pageData.transactions);
         }
 
+        //Sort transactions based on Date
+        const compareFunc = (a, b) => {
+            if (a.Date > b.Date) {
+                return -1;
+            }
+            if (a.Date < b.Date) {
+                return 1;
+            }
+            return 0;
+        }
+        transactions.sort(compareFunc);
+
         const balance = renderTableAndCalculateBalance(transactions,
             transactionTableBody);
 
