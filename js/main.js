@@ -28,12 +28,20 @@ const fetchPage = async (page) => {
  * @returns {string} - The HTML representation of row data
  */
 const createRow = (transactionRow) => {
+    //change data format
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    let formatedDate = new Date(transactionRow.Date).
+        toLocaleDateString('en-US', options);
+    let formatedAmount = Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD'
+    }).format(transactionRow.Amount);
+
     //generate and returns the new row
     return `<tr>
-    <td>${transactionRow.Date}</td>
+    <td>${formatedDate}</td>
     <td>${transactionRow.Company}</td>
     <td>${transactionRow.Ledger}</td>
-    <td>${transactionRow.Amount}</td>
+    <td>${formatedAmount}</td>
     </tr>`
 }
 
@@ -52,6 +60,7 @@ const renderTableAndCalculateBalance = (transactions, tableBody) => {
             tableBody.innerHTML += createRow(item);
         })
     }
+    return totalBalance;
 }
 
 //The application
@@ -74,8 +83,14 @@ const app = async () => {
             transactions = transactions.concat(pageData.transactions);
         }
 
-        renderTableAndCalculateBalance(transactions,
+        const balance = renderTableAndCalculateBalance(transactions,
             transactionTableBody);
+
+        //Show the total balance
+        let formatedBalance = Intl.NumberFormat('en-US',
+            { style: 'currency', currency: 'USD' })
+            .format(balance);
+        totalBalance.innerHTML = `${formatedBalance}`
 
     } catch (e) {
         console.log(e)
